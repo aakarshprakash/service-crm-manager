@@ -29,6 +29,8 @@ export interface User {
   branch_id: number | null;
   punch_status: 'in' | 'out';
   punched_at: string | null;
+  /** Signed in with a temporary password from the admin: must choose their own first. */
+  must_change_password?: boolean;
   abilities: string[];
   tenant: Tenant | null;
 }

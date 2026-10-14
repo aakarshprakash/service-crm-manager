@@ -8,11 +8,13 @@ import { getPushStatus, registerForPush } from '@/lib/push';
 import { Text } from '@/components/Text';
 import { Button, Card, ListRow, Muted, Screen } from '@/components/ui';
 import { toast } from '@/components/toast';
+import { ChangePasswordForm } from '@/components/ChangePassword';
 import { colors } from '@/components/theme';
 
 export default function More() {
   const { user, can, logout } = useAuth();
   const [testing, setTesting] = useState(false);
+  const [changing, setChanging] = useState(false);
 
   const testPush = async () => {
     setTesting(true);
@@ -63,6 +65,17 @@ export default function More() {
         <Muted>New complaints from customers, cash closes to verify, expense and leave requests, low stock and a 9:30 am summary of overdue and unassigned jobs.</Muted>
         <Button title="Send a test notification" icon="notifications-outline" variant="secondary" size="sm" loading={testing} onPress={testPush} style={{ marginTop: 10, alignSelf: 'flex-start' }} />
         {getPushStatus() === 'denied' && <Text style={{ color: colors.amber, marginTop: 6, fontSize: 12 }}>Notifications are blocked in phone settings.</Text>}
+      </Card>
+
+      <Card title="Password">
+        {changing ? (
+          <ChangePasswordForm onDone={() => setChanging(false)} />
+        ) : (
+          <>
+            <Muted>Changing it signs you out of your other phones and browsers.</Muted>
+            <Button title="Change password" icon="key-outline" variant="secondary" size="sm" onPress={() => setChanging(true)} style={{ marginTop: 10, alignSelf: 'flex-start' }} />
+          </>
+        )}
       </Card>
 
       <Button
