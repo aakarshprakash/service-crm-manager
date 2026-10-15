@@ -1,8 +1,22 @@
+import { View } from 'react-native';
 import { Stack } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useAuth } from '@/lib/auth';
+import { ForcePasswordChange } from '@/components/ChangePassword';
 import { FONT } from '@/components/Text';
 import { colors } from '@/components/theme';
 
 export default function AppLayout() {
+  const { user } = useAuth();
+  const insets = useSafeAreaInsets();
+  // A temporary password from the admin must be replaced before anything else.
+  if (user?.must_change_password) {
+    return (
+      <View style={{ flex: 1, backgroundColor: colors.bg, paddingTop: insets.top }}>
+        <ForcePasswordChange />
+      </View>
+    );
+  }
   return (
     <Stack
       screenOptions={{

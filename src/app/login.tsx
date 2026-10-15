@@ -78,7 +78,7 @@ export default function Login() {
 
           <View style={{ alignItems: 'center', gap: 4 }}>
             <Text style={{ fontSize: 12, color: '#94A3B8' }}>Service Business, Simplified.</Text>
-            <Text style={{ fontSize: 11, color: '#64748B' }}>v{Constants.expoConfig?.version}</Text>
+            <Text style={{ fontSize: 11, color: '#64748B' }}>v{Constants.expoConfig?.version} · Powered by <Text style={{ fontWeight: '700', letterSpacing: 1.5, color: '#94A3B8' }}>SYSNAC</Text></Text>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

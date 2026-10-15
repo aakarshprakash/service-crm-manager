@@ -8,11 +8,13 @@ import { getPushStatus, registerForPush } from '@/lib/push';
 import { Text } from '@/components/Text';
 import { Button, Card, ListRow, Muted, Screen } from '@/components/ui';
 import { toast } from '@/components/toast';
+import { ChangePasswordForm } from '@/components/ChangePassword';
 import { colors } from '@/components/theme';
 
 export default function More() {
   const { user, can, logout } = useAuth();
   const [testing, setTesting] = useState(false);
+  const [changing, setChanging] = useState(false);
 
   const testPush = async () => {
     setTesting(true);
@@ -65,6 +67,17 @@ export default function More() {
         {getPushStatus() === 'denied' && <Text style={{ color: colors.amber, marginTop: 6, fontSize: 12 }}>Notifications are blocked in phone settings.</Text>}
       </Card>
 
+      <Card title="Password">
+        {changing ? (
+          <ChangePasswordForm onDone={() => setChanging(false)} />
+        ) : (
+          <>
+            <Muted>Changing it signs you out of your other phones and browsers.</Muted>
+            <Button title="Change password" icon="key-outline" variant="secondary" size="sm" onPress={() => setChanging(true)} style={{ marginTop: 10, alignSelf: 'flex-start' }} />
+          </>
+        )}
+      </Card>
+
       <Button
         title="Sign out"
         icon="log-out-outline"
@@ -76,7 +89,7 @@ export default function More() {
           ])
         }
       />
-      <Muted style={{ textAlign: 'center', fontSize: 12 }}>Servon Manager v{Constants.expoConfig?.version}</Muted>
+      <Muted style={{ textAlign: 'center', fontSize: 12 }}>Servon Manager v{Constants.expoConfig?.version} · Powered by <Text style={{ fontWeight: '700', letterSpacing: 1.5 }}>SYSNAC</Text></Muted>
     </Screen>
   );
 }
