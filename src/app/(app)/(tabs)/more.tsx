@@ -89,7 +89,7 @@ export default function More() {
           ])
         }
       />
-      <Muted style={{ textAlign: 'center', fontSize: 12 }}>Servon Manager v{Constants.expoConfig?.version}</Muted>
+      <Muted style={{ textAlign: 'center', fontSize: 12 }}>Servon Manager v{Constants.expoConfig?.version} · Powered by <Text style={{ fontWeight: '700', letterSpacing: 1.5 }}>SYSNAC</Text></Muted>
     </Screen>
   );
 }
